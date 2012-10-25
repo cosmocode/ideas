@@ -1,0 +1,6 @@
+[submodule "application/third_party/Twig"]
+	path = application/third_party/Twig
+	url = https://github.com/fabpot/Twig.git
+[submodule "application/third_party/lessphp"]
+	path = application/third_party/lessphp
+	url = https://github.com/leafo/lessphp.git
