@@ -358,5 +358,7 @@ $config['rewrite_short_tags'] = FALSE;
 $config['proxy_ips'] = '';
 
 
+$config['cachecss'] = false; //should be true for live systems
+
 /* End of file config.php */
 /* Location: ./application/config/config.php */
