@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ideas</title>
+    <link href="{{base_url('minify/css?t=' ~ _cachebuster)}}" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    {% include "sub/messages.twig" %}
+
+    {% block content %}
+        <div class="alert alert-error">TWIG: No content block</div>
+    {% endblock %}
+</div>
+
+    <!-- JavaScript - Placed at the end of the document so the pages load faster -->
+    <script type="text/javascript">
+        var SITE_BASE = '{{base_url()}}';
+    </script>
+    <script type="text/javascript" src="{{base_url('minify/js/default?t=' ~ _cachebuster)}}"></script>
+    {% block script %}
+    {% endblock %}
+</body>
+</html>

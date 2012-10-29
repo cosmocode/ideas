@@ -39,15 +39,13 @@ class MY_Loader extends CI_Loader {
     }
 
     public function view($view, $vars = array(), $return = FALSE) {
-        /*
         $vars += array(
-            '_user'     => $this->ci->user->get(),
+/*            '_user'     => $this->ci->user->get(),
             '_company'  => $this->ci->company->current(),
             '_messages' => $this->ci->messages,
-            '_imaging'  => $this->ci->imaging,
+            '_imaging'  => $this->ci->imaging,*/
             '_cachebuster' => filemtime(FCPATH . 'index.php'),
         );
-        */
 
         $content = $this->twig->loadTemplate("$view.twig")->render($vars);
         if ($return) {

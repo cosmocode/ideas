@@ -1,0 +1,13 @@
+<div class="messages">
+    <noscript>
+        <div class="alert">
+            <strong>Achtung!</strong> Du hast kein JavaScript eingeschaltet. Einige Teile des Systems werden nicht richtig funktionieren!
+        </div>
+    </noscript>
+    {% for msg in _messages %}
+        <div class="alert alert-{{msg.type}}">
+            <button class="close" data-dismiss="alert">×</button>
+            {{msg.text|raw}}
+        </div>
+    {% endfor %}
+</div>
