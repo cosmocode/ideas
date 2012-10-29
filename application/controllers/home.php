@@ -10,11 +10,7 @@ class Home extends MY_Controller {
 
         $this->idea->vote(0,'andi',1);
 
-        $res = $this->idea->fetch();
-
-        print_r($res);
-
-
-		$this->load->view('home');
+        $ideas = $this->idea->fetch();
+        $this->load->view('home', array('ideas' => $ideas));
 	}
 }

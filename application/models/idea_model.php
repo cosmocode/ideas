@@ -22,7 +22,8 @@ class Idea_model extends CI_Model {
                     ON A.id = B.idea
                  WHERE 1=1
                        $where
-              GROUP BY A.id";
+              GROUP BY A.id
+              ORDER BY votes DESC";
         $query = $this->db->query($sql);
 
         return $query->result();

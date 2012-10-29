@@ -4,5 +4,14 @@
 
 heya
 
+<table>
+{% for idea in ideas %}
+    <tr>
+        <td>{{idea.id}}</td>
+        <td>{{idea.votes}}</td>
+        <td>{{idea.title}}</td>
+    </tr>
+{% endfor %}
+</table>
 
 {% endblock %}
