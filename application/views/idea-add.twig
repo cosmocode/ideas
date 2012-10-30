@@ -1,0 +1,28 @@
+{% set title = 'New Idea' %}
+{% extends "layout/default.twig" %}
+{% block content %}
+
+<h2>{{title}}</h2>
+
+<form class="form-horizontal" action="{{site_url('idea/add')}}" method="post">
+    <div class="control-group">
+        <label class="control-label" for="inputSubject">Your idea:</label>
+        <div class="controls">
+            <input type="text" class="input-xxlarge" name="subject" id="inputSubject" placeholder="Subject" value="{{subject}}">
+        </div>
+    </div>
+
+    <div class="control-group">
+        <div class="controls">
+            <textarea name="description" rows="5" cols="80" class="input-xxlarge" placeholder="Describe your idea here">{{description}}</textarea>
+        </div>
+    </div>
+
+    <div class="form-actions">
+        <input name="save" type="submit" class="btn btn-primary" value="Add your idea">
+        <a href="{{site_url()}}" class="btn">Cancel</a>
+    </div>
+</form>
+
+
+{% endblock %}

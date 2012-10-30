@@ -20,12 +20,13 @@
     <div class="masthead">
         <ul class="nav nav-pills pull-right">
             {% if _user %}
+                <li><a href="{{site_url('idea/add')}}">Submit a new Idea</a></li>
                 <li><a href="{{site_url('logout')}}">Logout {{_user.fullname}}</a></li>
             {% else %}
                 <li><a href="{{site_url('login')}}">Login</a></li>
             {% endif %}
         </ul>
-        <h3 class="muted">Ideas</h3>
+        <h1 class="muted"><a href="{{site_url()}}">Ideas</a></h1>
     </div>
 
 

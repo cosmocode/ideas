@@ -7,23 +7,29 @@ class Idea_model extends CI_Model {
      *
      * @todo offset/limit
      * @param bool $all   Include closed issues?
-     * @param int  $order Sort by FIXME
+     * @param string $order Sort by top, new
      * @return array the results
      */
-    public function fetch($all = false, $order = 0) {
+    public function fetch($all = false, $order = 'top') {
         if($all){
             $where = '';
         } else {
             $where = "AND status = ''";
         }
 
-        $sql   = "SELECT A.*, SUM(B.vote) as votes
+        if($order == 'new'){
+            $orderby = 'created DESC';
+        }else{
+            $orderby = 'votes DESC, created DESC';
+        }
+
+        $sql   = "SELECT A.*, IFNULL(SUM(B.vote),0) as votes
                   FROM idea A LEFT JOIN vote B
                     ON A.id = B.idea
                  WHERE 1=1
                        $where
               GROUP BY A.id
-              ORDER BY votes DESC";
+              ORDER BY $orderby";
         $query = $this->db->query($sql);
 
         return $query->result();
@@ -36,10 +42,11 @@ class Idea_model extends CI_Model {
      * @return object a single DB result
      */
     public function get($ideaID) {
-        $sql   = "SELECT A.*, SUM(B.vote) as votes
+        $sql   = "SELECT A.*, IFNULL(SUM(B.vote),0) as votes
                   FROM idea A LEFT JOIN vote B
                     ON A.id = B.idea
-                 WHERE id = ?";
+                 WHERE A.id = ?
+              GROUP BY A.id";
         $query = $this->db->query($sql, array($ideaID));
 
         return $query->row();

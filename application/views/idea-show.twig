@@ -1,0 +1,11 @@
+{% set title = idea.title %}
+{% extends "layout/default.twig" %}
+{% block content %}
+
+<h2>{{title}}</h2>
+
+{{idea.votes}} Votes so far
+
+{{idea.description}}
+
+{% endblock %}

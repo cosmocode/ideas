@@ -2,20 +2,19 @@
 
 class Home extends MY_Controller {
 
-	public function index()	{
-
-        if($this->user->current){
-            $this->msg('logged in', 1);
-        }else{
-            $this->msg('not logged in', -1);
-        }
-
+    public function __construct() {
+        parent::__construct();
         $this->load->model('idea');
-        //$this->idea->add('Test', 'Some great idea', 'andi');
+    }
 
-        $this->idea->vote(0,'andi',1);
-
-        $ideas = $this->idea->fetch();
-        $this->load->view('home', array('ideas' => $ideas));
+	public function index()	{
+        $ideas = $this->idea->fetch(false, 'top');
+        $this->load->view('home', array('ideas' => $ideas, 'order' => 'top'));
 	}
+
+    public function newest()	{
+        $ideas = $this->idea->fetch(false, 'new');
+        $this->load->view('home', array('ideas' => $ideas, 'order' => 'new'));
+    }
+
 }

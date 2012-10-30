@@ -2,7 +2,12 @@
 {% extends "layout/default.twig" %}
 {% block content %}
 
-heya
+
+<ul class="nav nav-tabs clearfix">
+    <li {% if order == 'top' %}class="active"{% endif %}><a href="{{site_url()}}">Top Ideas</a></li>
+    <li {% if order == 'new' %}class="active"{% endif %}><a href="{{site_url('new')}}">Newest Ideas</a></li>
+</ul>
+
 
 <table>
 {% for idea in ideas %}
@@ -10,6 +15,7 @@ heya
         <td>{{idea.id}}</td>
         <td>{{idea.votes}}</td>
         <td>{{idea.title}}</td>
+        <td>{{idea.created}}</td>
     </tr>
 {% endfor %}
 </table>
