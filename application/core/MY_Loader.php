@@ -42,8 +42,8 @@ class MY_Loader extends CI_Loader {
         $vars += array(
 /*            '_user'     => $this->ci->user->get(),
             '_company'  => $this->ci->company->current(),
-            '_messages' => $this->ci->messages,
             '_imaging'  => $this->ci->imaging,*/
+            '_messages' => $this->ci->messages,
             '_cachebuster' => filemtime(FCPATH . 'index.php'),
         );
 

@@ -4,6 +4,11 @@ class Home extends MY_Controller {
 
 	public function index()	{
 
+        if($this->user->login('adtest','a2mbFT6jrH9K')){
+            $this->msg('logged in', 1);
+        }else{
+            $this->msg('not logged in', -1);
+        }
 
         $this->load->model('idea');
         //$this->idea->add('Test', 'Some great idea', 'andi');

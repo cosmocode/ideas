@@ -33,13 +33,21 @@ class User_model extends CI_Model {
 
         // fetch user data
         $userinfo  = $adldap->user()->info($login);
-        $groupinfo = $adldap->user()->groups($login);
+        $groups = $adldap->user()->groups($login);
+
+        // arrays are weird
+        $email  = '';
+        $name   = $login;
+        $groups = array();
+        if(isset($userinfo[0]['email'][0])) $email = $userinfo[0]['email'][0];
+        if(isset($userinfo[0]['displayname'][0])) $name = $userinfo[0]['displayname'][0];
+
+        $role = 0;
 
         // create magic token
         $magic = sha1(rand());
         $this->session->set_userdata('magic', $magic);
 
-        // todo add role and fullname to DB
         // todo calculate role from group memberships
 
         // create/update user info mirror
@@ -47,13 +55,15 @@ class User_model extends CI_Model {
                     SET login = ?,
                         email = ?,
                         fullname = ?,
+                        role = ?,
                         magic = ?";
         $this->db->query(
             $sql,
             array(
                  $login,
-                 $userinfo['email'],
-                 $userinfo['firstname'].' '.$userinfo['lastname'],
+                 $email,
+                 $name,
+                 $role,
                  $magic
             )
         );

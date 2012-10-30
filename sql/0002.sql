@@ -1,0 +1,5 @@
+ALTER TABLE `user`
+  ADD COLUMN `fullname` VARCHAR(255) NOT NULL DEFAULT '' AFTER `email`;
+
+ALTER TABLE `user`
+  ADD COLUMN `role` INT NOT NULL DEFAULT 0 AFTER `fullname`;
