@@ -1,0 +1,29 @@
+{% set title = 'Login' %}
+{% extends "layout/default.twig" %}
+{% block content %}
+
+
+<div class="row">
+
+<div class="span6 offset3">
+<form class="form-horizontal well" action="{{site_url('login')}}" method="post">
+    <div class="control-group">
+        <label class="control-label" for="inputLogin">Username</label>
+        <div class="controls">
+            <input name="login" type="text" id="inputLogin" placeholder="Username">
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="inputPassword">Password</label>
+        <div class="controls">
+            <input name="password" type="password" id="inputPassword" placeholder="Password">
+        </div>
+    </div>
+    <div class="form-actions">
+        <input name="go" type="submit" class="btn btn-primary" value="Sign in" />
+    </div>
+</form>
+</div>
+</div>
+
+{% endblock %}

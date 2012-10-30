@@ -1,24 +1,50 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Ideas</title>
+    <meta charset="utf-8">
+    <title>Ideas - {{title}}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Le styles -->
     <link href="{{base_url('minify/css?t=' ~ _cachebuster)}}" rel="stylesheet">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
 </head>
+
 <body>
+
 <div class="container">
+    <div class="masthead">
+        <ul class="nav nav-pills pull-right">
+            {% if _user %}
+                <li><a href="{{site_url('logout')}}">Logout {{_user.fullname}}</a></li>
+            {% else %}
+                <li><a href="{{site_url('login')}}">Login</a></li>
+            {% endif %}
+        </ul>
+        <h3 class="muted">Ideas</h3>
+    </div>
+
+
     {% include "sub/messages.twig" %}
 
     {% block content %}
-        <div class="alert alert-error">TWIG: No content block</div>
+    <div class="alert alert-error">TWIG: No content block</div>
     {% endblock %}
+
+
 </div>
 
-    <!-- JavaScript - Placed at the end of the document so the pages load faster -->
-    <script type="text/javascript">
-        var SITE_BASE = '{{base_url()}}';
-    </script>
-    <script type="text/javascript" src="{{base_url('minify/js/default?t=' ~ _cachebuster)}}"></script>
-    {% block script %}
-    {% endblock %}
+<!-- JavaScript - Placed at the end of the document so the pages load faster -->
+<script type="text/javascript">
+    var SITE_BASE = '{{base_url()}}';
+</script>
+<script type="text/javascript" src="{{base_url('minify/js/default?t=' ~ _cachebuster)}}"></script>
+{% block script %}
+{% endblock %}
+
 </body>
 </html>

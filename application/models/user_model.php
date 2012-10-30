@@ -13,6 +13,16 @@ class User_model extends CI_Model {
     }
 
     /**
+     * Logs out a user by removing her session magic
+     *
+     * @return bool always true
+     */
+    public function logout() {
+        $this->session->unset_userdata('magic');
+        return true;
+    }
+
+    /**
      * Login a user via Active Directory
      *
      * @param $login
@@ -32,8 +42,8 @@ class User_model extends CI_Model {
         }
 
         // fetch user data
-        $userinfo  = $adldap->user()->info($login);
-        $groups = $adldap->user()->groups($login);
+        $userinfo = $adldap->user()->info($login);
+        $groups   = $adldap->user()->groups($login);
 
         // arrays are weird
         $email  = '';
