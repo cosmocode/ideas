@@ -6,7 +6,18 @@
 <ul class="nav nav-tabs clearfix">
     <li {% if order == 'top' %}class="active"{% endif %}><a href="{{site_url()}}">Top Ideas</a></li>
     <li {% if order == 'new' %}class="active"{% endif %}><a href="{{site_url('new')}}">Newest Ideas</a></li>
+    <li {% if order == 'search' %}class="active"{% endif %}><a href="{{site_url('search')}}">Search</a></li>
 </ul>
+
+{% if order == 'search' %}
+<form class="form-inline" action="{{site_url('search')}}">
+    <label>
+        Search for ideas:
+        <input name="q" type="text" placeholder="Keywords" value="{{query}}">
+    </label>
+    <button type="submit" class="btn"><i class="icon-search"></i> Search</button>
+</form>
+{% endif %}
 
 
 <table class="table">

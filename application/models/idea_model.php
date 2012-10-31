@@ -38,6 +38,29 @@ class Idea_model extends CI_Model {
     }
 
     /**
+     * Execute a fulltext search
+     *
+     * @param string $search search query
+     * @return mixed
+     */
+    public function search($search){
+        $sql   = "SELECT A.*,
+                         IFNULL(SUM(B.vote),0) as votes,
+                         C.fullname,
+                         MATCH(A.title, A.description) AGAINST (? WITH QUERY EXPANSION) AS score
+                    FROM idea A LEFT JOIN vote B
+                                       ON A.id = B.idea
+                                LEFT JOIN user C
+                                       ON A.login = C.login
+                   WHERE MATCH(A.title, A.description) AGAINST (? WITH QUERY EXPANSION)
+                GROUP BY A.id
+                ORDER BY score DESC";
+
+        $query = $this->db->query($sql, array($search, $search));
+        return $query->result();
+    }
+
+    /**
      * Get a single idea
      *
      * @param $ideaID

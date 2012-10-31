@@ -12,9 +12,18 @@ class Home extends MY_Controller {
         $this->load->view('home', array('ideas' => $ideas, 'order' => 'top'));
 	}
 
-    public function newest()	{
+    public function newest() {
         $ideas = $this->idea->fetch(false, 'new');
         $this->load->view('home', array('ideas' => $ideas, 'order' => 'new'));
     }
 
+    public function search() {
+        $ideas = $this->idea->search($this->input->get('q'));
+        $this->load->view('home',
+                          array(
+                               'ideas' => $ideas,
+                               'order' => 'search',
+                               'query' => $this->input->get('q')
+                          ));
+    }
 }
