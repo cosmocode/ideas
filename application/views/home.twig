@@ -9,13 +9,15 @@
 </ul>
 
 
-<table>
+<table class="table">
 {% for idea in ideas %}
     <tr>
-        <td>{{idea.id}}</td>
-        <td>{{idea.votes}}</td>
-        <td>{{idea.title}}</td>
-        <td>{{idea.created}}</td>
+        <td>{{macro.votes(idea.id, idea.votes)}}</td>
+        <td>
+            <h3><a href="{{site_url('idea/show/' ~ idea.id)}}">{{idea.title}}</a></h3>
+            <p class="muted">{{idea.description}}</p>
+            <p>by <strong>{{idea.fullname}}</strong> submitted at <em>{{idea.created}}</em></p>
+        </td>
     </tr>
 {% endfor %}
 </table>

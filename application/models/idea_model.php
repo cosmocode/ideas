@@ -23,9 +23,11 @@ class Idea_model extends CI_Model {
             $orderby = 'votes DESC, created DESC';
         }
 
-        $sql   = "SELECT A.*, IFNULL(SUM(B.vote),0) as votes
+        $sql   = "SELECT A.*, IFNULL(SUM(B.vote),0) as votes, C.fullname
                   FROM idea A LEFT JOIN vote B
-                    ON A.id = B.idea
+                                     ON A.id = B.idea
+                              LEFT JOIN user C
+                                     ON A.login = C.login
                  WHERE 1=1
                        $where
               GROUP BY A.id
@@ -127,5 +129,27 @@ class Idea_model extends CI_Model {
 
         $row = $query->row();
         return (int) $row->votes;
+    }
+
+    /**
+     * Return vote and personal vote counts for the given ideas
+     *
+     * @param array $ideaIDs list of ideas to check
+     * @param string $login the current user for personal vote choices
+     * @return mixed
+     */
+    public function votes($ideaIDs, $login=''){
+        $ids = array_map('intVal', (array) $ideaIDs);
+        $sql = "SELECT A.idea,
+                       SUM(A.vote) AS votes,
+                       MAX(B.vote) AS myvote
+                  FROM vote A LEFT JOIN vote B
+                    ON A.idea = B.idea
+                   AND A.login = B.login
+                   AND B.login = ?
+                 WHERE A.idea IN (".join(',',$ids).")
+              GROUP BY A.idea";
+        $query = $this->db->query($sql, array($login));
+        return $query->result();
     }
 }

@@ -47,6 +47,7 @@ class Minify extends MY_Controller {
             'default' => array(
                 'jquery-1.8.2.min.js',
                 'bootstrap.min.js',
+                'vote.js',
             ),
         );
 
