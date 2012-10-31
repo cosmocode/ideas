@@ -44,9 +44,11 @@ class Idea_model extends CI_Model {
      * @return object a single DB result
      */
     public function get($ideaID) {
-        $sql   = "SELECT A.*, IFNULL(SUM(B.vote),0) as votes
+        $sql   = "SELECT A.*, IFNULL(SUM(B.vote),0) as votes, C.fullname
                   FROM idea A LEFT JOIN vote B
-                    ON A.id = B.idea
+                                     ON A.id = B.idea
+                              LEFT JOIN user C
+                                     ON A.login = C.login
                  WHERE A.id = ?
               GROUP BY A.id";
         $query = $this->db->query($sql, array($ideaID));

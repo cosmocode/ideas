@@ -48,9 +48,9 @@ function vote_init($box,votes,mine) {
     if (mine === -1) minedown = ' mine';
     if (mine === 1) mineup = ' mine';
 
-    html += '<a class="ttb vote-down' + minedown + '" title="Good idea!"><i class="icon-thumbs-down"></i></a>';
+    html += '<a class="vote-up' + mineup + '" title="Bad idea!">⋀</a>';
     html += '<div class="votes">' + votes + '</div>';
-    html += '<a class="ttb vote-up' + mineup + '" title="Bad idea!"><i class="icon-thumbs-up"></i></a>';
+    html += '<a class="vote-down' + minedown + '" title="Good idea!">⋁</a>';
 
     $box.html(html);
     $box.find('a').click(vote_cast);

@@ -4,8 +4,14 @@
 
 <h2>{{title}}</h2>
 
-{{idea.votes}} Votes so far
+<div class="pull-left">
+    {{macro.votes(idea.id, idea.votes)}}
+</div>
 
-{{idea.description}}
+<p>by <strong>{{idea.fullname}}</strong> submitted at <em>{{idea.created}}</em></p>
+
+<p>{{idea.description|prettytext}}</p>
+
+
 
 {% endblock %}
