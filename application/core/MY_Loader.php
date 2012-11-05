@@ -51,6 +51,7 @@ class MY_Loader extends CI_Loader {
             '_user'        => $this->ci->user->current,
             '_messages'    => $this->ci->messages,
             '_cachebuster' => filemtime(FCPATH.'index.php'),
+            '_idea_states' => $this->ci->config->item('idea_states'),
         );
 
         $content = $this->twig->loadTemplate("$view.twig")->render($vars);

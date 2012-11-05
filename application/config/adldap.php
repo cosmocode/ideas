@@ -1,0 +1,88 @@
+<?php  if(!defined('BASEPATH')) exit('No direct script access allowed');
+/**
+ * This configures the access to your Active Directory Server and is need for authentication
+ */
+
+/**
+ * Account Suffix
+ *
+ * The full account suffix for your domain.
+ */
+$config['account_suffix'] = "@w2k3.cosmocode.de";
+
+/**
+ * Base DN
+ *
+ * The base dn for your domain. This is generally the same as your account suffix, but broken up and prefixed with DC=.
+ * Your base dn can be located in the extended attributes in Active Directory Users and Computers MMC.
+ *
+ * For example if your account suffix is @mydomain.local then your base DN is usually DC=mydomain,DC=local
+ *
+ * If you can authenticate users ok, but searching doesn't work, it's generally because you have specified an
+ * incorrect base_dn.
+ *
+ * If you set this to NULL, adLDAP will attempt to detect this information automatically from your domain controller
+ */
+$config['base_dn'] = "DC=w2k3,DC=cosmocode,DC=de";
+
+/**
+ * Domain Controllers
+ *
+ * An array of Domain Controllers. If you would like your class to balance the queries over multiple controllers, you
+ * can specify multiple controllers in the array (or just specify the domain name, as it will resolve to any Domain
+ * Controller in the Active Directory Domain).
+ *
+ * Bear in mind when setting this option, requests will still be sent to offline domain controllers specified in this
+ * array. This array implements load balancing, not fault tolerance.
+ */
+$config['domain_controllers'] = array("195.170.124.172");
+
+/**
+ * User Authentication
+ *
+ * By default, adLDAP will perform your searches with permissions of the user account you have called with
+ * authenticate(). You may wish to specify an account with higher privileges to perform privelledged operations.
+ *
+ * It is strongly recommended to do this, as a standard domain user account will not have many permissions to query
+ * over Active Directory.
+ */
+$config['admin_username'] = NULL;
+$config['admin_password'] = NULL;
+
+/**
+ * Real Primary Group
+ *
+ * AD does not alwaysreturn the primary group. http://support.microsoft.com/?kbid=321360 This tweak will resolve the
+ * real primary group, but may be resource intensive. Setting to false will fudge “Domain Users” and is much faster.
+ * Keep in mind though that if someone's primary group is NOT domain users, this is obviously going to mess up the
+ * results.
+ */
+$config['real_primary_group'] = true;
+
+/**
+ * SSL
+ *
+ * adLDAP can use LDAP over SSL to provide extra functionality such as password changes. Both your domain controller
+ * and your web server need to be configured to allow LDAP over SSL for this to happen, it cannot just be set to true.
+ * By default domain controllers do not have SSL enabled. Please see the section on LDAP over SSL for more information.
+ */
+$config['use_ssl'] = true;
+
+/**
+ * TLS
+ *
+ * adLDAP can use LDAP over TLS connections rather than SSL to provide extra functionality such as password changes.
+ * Both your domain controller and your web server need to be configured for this to happen, it cannot just be set to
+ * true. Please see the section on LDAP over SSL for more information. If you enable TLS, you must disable SSL and
+ * vice-versa.
+ */
+$config['use_tls'] = false;
+
+/**
+ * Recursive Groups
+ * When querying group membership, do it recursively, eg. User Fred is a member of group “Business Unit”
+ * “Business Unit” is a member of group “Department” “Department” is a member of group “Company”
+ *
+ * $adldap→user()→inGroup(“Fred”,”Company”) will returns true with this option turned on, false if turned off.
+ */
+$config['recursive_groups'] = true;

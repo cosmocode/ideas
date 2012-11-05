@@ -4,14 +4,27 @@
 
 <h2>{{title}}</h2>
 
+{% if idea.status == 0 %}
 <div class="pull-left">
     {{macro.votes(idea.id, idea.votes)}}
 </div>
+{% endif %}
 
 <p>by <strong>{{idea.fullname}}</strong> submitted at <em>{{idea.created}}</em></p>
 
 <p>{{idea.description|prettytext}}</p>
 
+{% if _user.role > 0 %}
+    <form class="form-inline" action="{{site_url('idea/show/' ~ idea.id)}}" method="post">
+        <legend>Change State</legend>
+        <select name="state">
+            {% for sid, state in _idea_states %}
+                <option value="{{sid}}" {% if idea.status == sid %}selected="selected"{% endif %}>{{state}}</option>
+            {% endfor %}
+        </select>
 
+        <input name="statechange" type="submit" class="btn" value="Change State">
+    </form>
+{% endif%}
 
 {% endblock %}

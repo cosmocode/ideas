@@ -80,7 +80,7 @@ $autoload['helper'] = array('url','form','twig');
 |
 */
 
-$autoload['config'] = array();
+$autoload['config'] = array('privileges');
 
 
 /*

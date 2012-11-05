@@ -22,9 +22,15 @@
 
 <table class="table">
 {% for idea in ideas %}
-    <tr>
-        <td>{{macro.votes(idea.id, idea.votes)}}</td>
-        <td>
+    <tr class="status-{{idea.status}}">
+        <td class="votes">
+            {% if idea.status == 0 %}
+                {{macro.votes(idea.id, idea.votes)}}
+            {% else %}
+                {{_idea_states[idea.status]}}
+            {% endif %}
+        </td>
+        <td class="idea">
             <h3><a href="{{site_url('idea/show/' ~ idea.id)}}">{{idea.title}}</a></h3>
             <p class="muted">{{idea.description|shorten(140)}}</p>
             <p>by <strong>{{idea.fullname}}</strong> submitted at <em>{{idea.created}}</em></p>

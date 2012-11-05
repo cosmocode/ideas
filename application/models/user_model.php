@@ -2,6 +2,9 @@
 
 class User_model extends CI_Model {
 
+    const ROLE_USER      = 0;
+    const ROLE_MODERATOR = 1;
+
     /**
      * @var object current User
      */
@@ -46,13 +49,10 @@ class User_model extends CI_Model {
         $groups   = $adldap->user()->groups($login);
 
         // arrays are weird
-        $email  = '';
-        $name   = $login;
-        $groups = array();
+        $email = '';
+        $name  = $login;
         if(isset($userinfo[0]['email'][0])) $email = $userinfo[0]['email'][0];
         if(isset($userinfo[0]['displayname'][0])) $name = $userinfo[0]['displayname'][0];
-
-        $role = 0;
 
         // create magic token
         $magic = sha1(rand());
@@ -73,12 +73,37 @@ class User_model extends CI_Model {
                  $login,
                  $email,
                  $name,
-                 $role,
+                 $this->getrole($login, $groups),
                  $magic
             )
         );
 
         return true;
+    }
+
+    /**
+     * Check given user and his groups agains the configured privilege arrays
+     *
+     * @param $login
+     * @param $groups
+     * @return int
+     */
+    public function getrole($login, $groups) {
+        $login  = $this->userclean($login);
+        $groups = array_map(array($this, 'userclean'), $groups);
+
+        $moderator_users  = array_map(array($this, 'userclean'), (array) $this->config->item('moderator_users'));
+        $moderator_groups = array_map(array($this, 'userclean'), (array) $this->config->item('moderator_groups'));
+
+        $this->msg(print_r($moderator_users, true));
+        $this->msg(print_r($moderator_groups, true));
+
+        if(in_array($login, $moderator_users)) return User_model::ROLE_MODERATOR;
+        foreach($groups as $group) {
+            if(in_array($group, $moderator_groups)) return User_model::ROLE_MODERATOR;
+        }
+
+        return User_model::ROLE_USER;
     }
 
     /**
@@ -103,6 +128,16 @@ class User_model extends CI_Model {
         $sql   = "SELECT * FROM user WHERE login = ?";
         $query = $this->db->query($sql, array($login));
         return $query - row();
+    }
+
+    /**
+     * used to clean up user and group names for comparison
+     *
+     * @param $string
+     * @return string
+     */
+    private function userclean($string) {
+        return trim(mb_strtolower($string, 'UTF-8'));
     }
 
 }

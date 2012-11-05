@@ -36,6 +36,14 @@ class Idea extends MY_Controller {
         $idea = $this->idea->get($ideaID);
         if(!$idea) show_404();
 
+        if($this->user->current && $this->user->current->role > 0){
+            if($this->input->post('statechange')){
+                $this->idea->setStatus($ideaID, (int) $this->input->post('state'));
+                $this->msg('State changed.', 1);
+                redirect('idea/show/'.$ideaID);
+            }
+        }
+
         $this->load->view('idea-show', array('idea' => $idea));
     }
 }

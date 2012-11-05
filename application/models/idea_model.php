@@ -17,7 +17,7 @@ class Idea_model extends CI_Model {
         if($all) {
             $where = '';
         } else {
-            $where = "AND status = ''";
+            $where = "AND status = 0";
         }
 
         if($order == 'new') {
@@ -153,11 +153,13 @@ class Idea_model extends CI_Model {
      * Authentication has to be checked before hand!
      *
      * @param int    $ideaID
-     * @param string $state
-     * @param string $login
+     * @param int    $status
      */
-    public function status($ideaID, $state, $login) {
-
+    public function setStatus($ideaID, $status) {
+        $sql = "UPDATE idea
+                   SET status = ?
+                 WHERE id = ?";
+        $this->db->query($sql, array($status, $ideaID));
     }
 
     /**
