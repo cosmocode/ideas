@@ -41,8 +41,14 @@
 $route['default_controller'] = "home";
 $route['404_override'] = '';
 
-$route['new']    = 'home/newest';
+
+$route['(:num)']        = 'home/index/$1';
+
+$route['new']           = 'home/newest';
+$route['new/(:num)']    = 'home/newest/$1';
+
 $route['search'] = 'home/search';
+$route['search/(:num)'] = 'home/search/$1';
 
 $route['logout'] = 'login/logout';
 

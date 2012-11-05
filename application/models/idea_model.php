@@ -6,11 +6,14 @@ class Idea_model extends CI_Model {
      * List ideas
      *
      * @todo offset/limit
-     * @param bool $all   Include closed issues?
-     * @param string $order Sort by top, new
+     * @param bool   $all    Include closed issues?
+     * @param string $order  Sort by top, new
+     * @param int    $limit  limit results to this number
+     * @param int    $offset start offset
+     * @param int    &$found will be filled with the number of all results
      * @return array the results
      */
-    public function fetch($all = false, $order = 'top') {
+    public function fetch($all = false, $order = 'top', $limit=0, $offset=0, &$found=null) {
         if($all){
             $where = '';
         } else {
@@ -23,7 +26,13 @@ class Idea_model extends CI_Model {
             $orderby = 'votes DESC, created DESC';
         }
 
-        $sql   = "SELECT A.*, IFNULL(SUM(B.vote),0) as votes, C.fullname
+        if($limit){
+            $limitby = 'LIMIT '.((int) $limit).' OFFSET '.((int) $offset);
+        }else{
+            $limitby = '';
+        }
+
+        $sql   = "SELECT SQL_CALC_FOUND_ROWS A.*, IFNULL(SUM(B.vote),0) as votes, C.fullname
                   FROM idea A LEFT JOIN vote B
                                      ON A.id = B.idea
                               LEFT JOIN user C
@@ -31,8 +40,14 @@ class Idea_model extends CI_Model {
                  WHERE 1=1
                        $where
               GROUP BY A.id
-              ORDER BY $orderby";
+              ORDER BY $orderby
+                       $limitby";
         $query = $this->db->query($sql);
+
+        if($limit){
+            $q = $this->db->query('SELECT FOUND_ROWS() AS found');
+            $found = $q->row()->found;
+        }
 
         return $query->result();
     }

@@ -4,7 +4,7 @@
 
 
 <ul class="nav nav-tabs clearfix">
-    <li {% if order == 'top' %}class="active"{% endif %}><a href="{{site_url()}}">Top Ideas</a></li>
+    <li {% if order == '' %}class="active"{% endif %}><a href="{{site_url()}}">Top Ideas</a></li>
     <li {% if order == 'new' %}class="active"{% endif %}><a href="{{site_url('new')}}">Newest Ideas</a></li>
     <li {% if order == 'search' %}class="active"{% endif %}><a href="{{site_url('search')}}">Search</a></li>
 </ul>
@@ -32,5 +32,8 @@
     </tr>
 {% endfor %}
 </table>
+
+{{pagination(site_url(order),limit,found)}}
+
 
 {% endblock %}

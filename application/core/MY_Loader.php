@@ -37,7 +37,8 @@ class MY_Loader extends CI_Loader {
         $this->twig->addFunction('set_value', new Twig_Function_Function('set_value'));
         $this->twig->addFunction('print_r', new Twig_Function_Function('print_r'));
 
-        $this->twig->addFilter('prettytext', new Twig_Filter_Function('prettytext',array('pre_escape' => 'html', 'is_safe' => array('html'))));
+        $this->twig->addFunction('pagination', new Twig_Function_Function('pagination', array('is_safe' => array('html'))));
+        $this->twig->addFilter('prettytext', new Twig_Filter_Function('prettytext', array('pre_escape' => 'html', 'is_safe' => array('html'))));
         $this->twig->addFilter('shorten', new Twig_Filter_Function('shorten'));
     }
 

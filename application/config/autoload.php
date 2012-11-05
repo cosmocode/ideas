@@ -64,7 +64,7 @@ $autoload['libraries'] = array('database','session','simplemigration');
 |	$autoload['helper'] = array('url', 'file');
 */
 
-$autoload['helper'] = array('url','form','filters');
+$autoload['helper'] = array('url','form','twig');
 
 
 /*

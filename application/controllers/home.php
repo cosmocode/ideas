@@ -7,14 +7,30 @@ class Home extends MY_Controller {
         $this->load->model('idea');
     }
 
-	public function index()	{
-        $ideas = $this->idea->fetch(false, 'top');
-        $this->load->view('home', array('ideas' => $ideas, 'order' => 'top'));
+    public function index($page=1, $order='')	{
+        $limit = 15; // how many hits per page
+
+        $found = 0;
+        $ideas = $this->idea->fetch(
+            false,
+            $order,
+            $limit,
+            ($page-1)*$limit,
+            $found
+        );
+
+
+        $this->load->view('home',
+                          array(
+                               'ideas'  => $ideas,
+                               'order'  => $order,
+                               'limit'  => $limit,
+                               'found'  => $found,
+                          ));
 	}
 
-    public function newest() {
-        $ideas = $this->idea->fetch(false, 'new');
-        $this->load->view('home', array('ideas' => $ideas, 'order' => 'new'));
+    public function newest($page=1) {
+        $this->index($page, 'new');
     }
 
     public function search() {
