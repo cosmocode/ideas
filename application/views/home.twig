@@ -33,7 +33,10 @@
 {% endfor %}
 </table>
 
-{{pagination(site_url(order),limit,found)}}
-
+{% if order == 'search' %}
+    {{pagination(site_url(order),limit,found, '?q=' ~ query|url_encode )}}
+{% else %}
+    {{pagination(site_url(order),limit,found)}}
+{% endif %}
 
 {% endblock %}

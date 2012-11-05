@@ -1,6 +1,6 @@
 <?php
 
-function pagination($uri, $limit, $total) {
+function pagination($uri, $limit, $total, $suffix = '') {
     $ci =& get_instance();
     $ci->load->library('pagination');
 
@@ -9,6 +9,16 @@ function pagination($uri, $limit, $total) {
         'total_rows'      => $total,
         'per_page'        => $limit,
         'uri_segment'     => $ci->uri->total_segments(),
+
+        'full_tag_open'   => '<div class="pagination pagination-centered"><ul>',
+        'full_tag_close'  => '</ul></div>',
+
+        'first_link'      => '|<',
+        'first_tag_open'  => '<li>',
+        'first_tag_close' => '</li>',
+        'last_link'       => '>|',
+        'last_tag_open'   => '<li>',
+        'last_tag_close'  => '</li>',
 
         'next_tag_open'   => '<li>',
         'next_tag_close'  => '</li>',
@@ -19,12 +29,12 @@ function pagination($uri, $limit, $total) {
         'num_tag_open'    => '<li>',
         'num_tag_close'   => '</li>',
 
+        'suffix'          => $suffix,
+        'first_url'       => $uri.$suffix
     );
 
     $ci->pagination->initialize($config);
-    $links = $ci->pagination->create_links();
-
-    return "<div class=\"pagination\"><ul>$links</ul></div>";
+    return $ci->pagination->create_links();
 }
 
 /**

@@ -1,45 +1,58 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php if(!defined('BASEPATH')) exit('No direct script access allowed');
 
 class Home extends MY_Controller {
+
+    // how many hits per page
+    const PERPAGE = 15;
 
     public function __construct() {
         parent::__construct();
         $this->load->model('idea');
     }
 
-    public function index($page=1, $order='')	{
-        $limit = 15; // how many hits per page
-
+    public function index($offset = 0, $order = '') {
         $found = 0;
         $ideas = $this->idea->fetch(
             false,
             $order,
-            $limit,
-            ($page-1)*$limit,
+            Home::PERPAGE,
+            $offset,
             $found
         );
 
-
-        $this->load->view('home',
-                          array(
-                               'ideas'  => $ideas,
-                               'order'  => $order,
-                               'limit'  => $limit,
-                               'found'  => $found,
-                          ));
-	}
-
-    public function newest($page=1) {
-        $this->index($page, 'new');
+        $this->load->view(
+            'home',
+            array(
+                 'ideas'  => $ideas,
+                 'order'  => $order,
+                 'limit'  => Home::PERPAGE,
+                 'found'  => $found,
+            )
+        );
     }
 
-    public function search() {
-        $ideas = $this->idea->search($this->input->get('q'));
-        $this->load->view('home',
-                          array(
-                               'ideas' => $ideas,
-                               'order' => 'search',
-                               'query' => $this->input->get('q')
-                          ));
+    public function newest($offset = 0) {
+        $this->index($offset, 'new');
+    }
+
+    public function search($offset=0) {
+        $found = 0;
+        $ideas = $this->idea->search(
+            $this->input->get('q'),
+            Home::PERPAGE,
+            $offset,
+            $found
+        );
+
+        $this->load->view(
+            'home',
+            array(
+                 'ideas'  => $ideas,
+                 'order'  => 'search',
+                 'query'  => $this->input->get('q'),
+                 'limit'  => Home::PERPAGE,
+                 'found'  => $found
+            )
+        );
     }
 }
