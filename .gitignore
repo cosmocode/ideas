@@ -3,3 +3,6 @@
 data/*
 application/logs/*
 *.bak
+application/config/adldap.php
+application/config/database.php
+application/config/privileges.php
