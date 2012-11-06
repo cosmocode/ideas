@@ -1,6 +1,8 @@
 Ideas - a simple idea voting platform
 =====================================
 
+with Active Directory connection
+
 Requirements
 ------------
 
@@ -8,6 +10,7 @@ Requirements
   - other webservers might work, but need special attention to rewriting
   - PHP needs to have the LDAP, Multibyte String and MySQL extensions available and enabled
 2. MySQL 4.1+
+3. An Active Directory Server for user authentication
 
 Setup
 -----
