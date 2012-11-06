@@ -16,7 +16,7 @@
 
 {% if _user.role > 0 %}
     <form class="form-inline" action="{{site_url('idea/show/' ~ idea.id)}}" method="post">
-        <legend>Change State</legend>
+        <legend>Moderation</legend>
         <select name="state">
             {% for sid, state in _idea_states %}
                 <option value="{{sid}}" {% if idea.status == sid %}selected="selected"{% endif %}>{{state}}</option>
@@ -24,7 +24,13 @@
         </select>
 
         <input name="statechange" type="submit" class="btn" value="Change State">
+
+        or
+
+        <a href="{{site_url('idea/edit/' ~ idea.id)}}" class="btn">Edit Idea</a>
     </form>
+
+
 {% endif%}
 
 {% endblock %}

@@ -112,6 +112,10 @@ class Idea_model extends CI_Model {
     }
 
     /**
+     * Adds a new idea
+     *
+     * Authentication has to be checked before hand!
+     *
      * @param string $title
      * @param string $description
      * @param string $login
@@ -127,6 +131,24 @@ class Idea_model extends CI_Model {
         $this->db->query($sql, array($title, $description, $login));
 
         return $this->db->insert_id();
+    }
+
+    /**
+     * Modifies an existing idea
+     *
+     * Authentication has to be checked before hand!
+     *
+     * @param $ideaID
+     * @param $title
+     * @param $description
+     */
+    public function edit($ideaID, $title, $description) {
+        $sql = "UPDATE idea
+                   SET title = ?,
+                       description = ?
+                 WHERE id = ?
+                   ";
+        $this->db->query($sql, array($title, $description, $ideaID));
     }
 
     /**

@@ -95,9 +95,6 @@ class User_model extends CI_Model {
         $moderator_users  = array_map(array($this, 'userclean'), (array) $this->config->item('moderator_users'));
         $moderator_groups = array_map(array($this, 'userclean'), (array) $this->config->item('moderator_groups'));
 
-        $this->msg(print_r($moderator_users, true));
-        $this->msg(print_r($moderator_groups, true));
-
         if(in_array($login, $moderator_users)) return User_model::ROLE_MODERATOR;
         foreach($groups as $group) {
             if(in_array($group, $moderator_groups)) return User_model::ROLE_MODERATOR;

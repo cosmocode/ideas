@@ -1,10 +1,18 @@
-{% set title = 'New Idea' %}
+{% if ideaID %}
+    {% set action = 'idea/edit/' ~ ideaID %}
+    {% set title = 'Edit Idea' %}
+{% else %}
+    {% set action = 'idea/add' %}
+    {% set title = 'New Idea' %}
+{% endif %}
+
 {% extends "layout/default.twig" %}
 {% block content %}
 
+
 <h2>{{title}}</h2>
 
-<form class="form-horizontal" action="{{site_url('idea/add')}}" method="post">
+<form class="form-horizontal" action="{{site_url(action)}}" method="post">
     <div class="control-group">
         <label class="control-label" for="inputSubject">Your idea:</label>
         <div class="controls">
@@ -19,7 +27,7 @@
     </div>
 
     <div class="form-actions">
-        <input name="save" type="submit" class="btn btn-primary" value="Add your idea">
+        <input name="save" type="submit" class="btn btn-primary" value="Save the idea">
         <a href="{{site_url()}}" class="btn">Cancel</a>
     </div>
 </form>
