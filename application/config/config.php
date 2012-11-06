@@ -357,7 +357,23 @@ $config['rewrite_short_tags'] = FALSE;
 */
 $config['proxy_ips'] = '';
 
+/*
+|--------------------------------------------------------------------------
+| Twig Templating Configuration
+|--------------------------------------------------------------------------
+*/
+$config['twig'] = array(
+    'cache' => APPPATH.'cache/twig',
+    'autoescape' => true
+);
 
+/**
+|--------------------------------------------------------------------------
+| Should CSS be cached?
+|--------------------------------------------------------------------------
+|
+| Should be true for production systems
+*/
 $config['cachecss'] = false; //should be true for live systems
 
 /* End of file config.php */

@@ -20,7 +20,7 @@ CREATE database ideas;
 
 Install the files to your Webserver webroot or a subdirectory of your choice and make sure your webserver honors the rewriting configuration in .htaccess files.
 
-Make the `FIXME` directory writable by the webserver.
+Make the `application/cache` directory writable by the webserver.
 
 Go to the `application/config` directory and copy the `*.dist` files to the same name without the `.dist`:
 

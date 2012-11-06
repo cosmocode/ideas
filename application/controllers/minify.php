@@ -2,8 +2,6 @@
 
 class Minify extends MY_Controller {
 
-    protected $NO_COMPANY_OK = true;
-
     /**
      * Compile the Stylesheets from LESS files
      *
@@ -13,7 +11,7 @@ class Minify extends MY_Controller {
         require_once(APPPATH . 'third_party/lessphp/lessc.inc.php');
 
         // default cache info
-        $cache = FCPATH . 'data/style.css';
+        $cache = APPPATH . 'cache/style.css';
         $time1 = @filemtime(FCPATH . 'index.php');
         $time2 = $time1;
 
@@ -52,7 +50,7 @@ class Minify extends MY_Controller {
         );
 
         // default cache info
-        $cache = FCPATH . 'data/' . $group . '.js';
+        $cache = APPPATH . 'cache/' . $group . '.js';
         $time1 = @filemtime(FCPATH . 'index.php');
         // check cache age
         $ctime = @filemtime($cache);
