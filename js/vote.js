@@ -48,8 +48,13 @@ function vote_init($box,votes,mine) {
     if (mine === -1) minedown = ' mine';
     if (mine === 1) mineup = ' mine';
 
+
+
     html += '<a class="vote-up' + mineup + '" title="Bad idea!">⋀</a>';
-    html += '<div class="votes">' + votes + '</div>';
+    if(votes >= 0)
+        html += '<div class="votes">' + votes + '</div>';
+    else
+        html +=  '<div class="votes"><div class="minus">' + votes + '</div></div>';
     html += '<a class="vote-down' + minedown + '" title="Good idea!">⋁</a>';
 
     $box.html(html);
