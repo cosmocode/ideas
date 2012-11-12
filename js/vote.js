@@ -81,7 +81,9 @@ function vote_cast(){
         function(data){
             vote_init($box,data['votes'],data['mine']);
             if(data.error == 1){
-                $('div.messages').append('<div class="alert alert-error"><button type="button" class="close" data-dismiss="alert">×</button>Please login to cast votes.</div>');
+                $('div.messages div.nologin-error').remove();
+                $('div.messages').append('<div class="alert alert-error nologin-error"><button type="button" class="close" data-dismiss="alert">×</button>Please login to cast votes.</div>');
+                $('div.messages div.nologin-error')[0].scrollIntoView();
             }
         }
     )

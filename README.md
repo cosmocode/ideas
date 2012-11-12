@@ -23,7 +23,7 @@ CREATE database ideas;
 
 Install the files to your Webserver webroot or a subdirectory of your choice and make sure your webserver honors the rewriting configuration in .htaccess files.
 
-Make the `application/cache` directory writable by the webserver.
+Make the `application/cache` and `application/log` directories writable by the webserver.
 
 Go to the `application/config` directory and copy the `*.dist` files to the same name without the `.dist`:
 
@@ -33,4 +33,13 @@ In `application/config/adldap.php` configure access to your Active Directory ser
 
 In `application/config/privileges.php` configure the users and/or groups that should have moderator rights.
 
-Open the application in your webborwer and you're ready to go.
+Open the application in your webbrowser and you're ready to go.
+
+Acknowledgements
+-------
+
+Made by [CosmoCode](http://www.cosmocode.de/).
+
+Made with [CodeIgniter](http://www.codeigniter.com/), [adLDAP](http://adldap.sourceforge.net/),
+[Twig](http://twig.sensiolabs.org/), [Bootstrap](http://twitter.github.com/bootstrap/),
+[lessphp](http://leafo.net/lessphp/) and [JQuery](http://jquery.com/).
