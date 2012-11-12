@@ -364,7 +364,8 @@ $config['proxy_ips'] = '';
 */
 $config['twig'] = array(
     'cache' => APPPATH.'cache/twig',
-    'autoescape' => true
+    'autoescape' => true,
+    'auto_reload' => true,
 );
 
 /**
