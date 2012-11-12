@@ -50,12 +50,12 @@ function vote_init($box,votes,mine) {
 
 
 
-    html += '<a class="vote-up' + mineup + '" title="Bad idea!">⋀</a>';
+    html += '<a class="vote-up' + mineup + '" title="Good idea!">⋀</a>';
     if(votes >= 0)
         html += '<div class="votes">' + votes + '</div>';
     else
         html +=  '<div class="votes"><div class="minus">' + votes + '</div></div>';
-    html += '<a class="vote-down' + minedown + '" title="Good idea!">⋁</a>';
+    html += '<a class="vote-down' + minedown + '" title="Bad idea!">⋁</a>';
 
     $box.html(html);
     $box.find('a').click(vote_cast);
