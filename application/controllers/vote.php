@@ -36,12 +36,12 @@ class Vote extends MY_Controller {
                 'idea'  => $ideaID,
                 'votes' => 0,
                 'mine'  => 0,
-                'error' => 0
+                'error' => 1
             );
 
             $res = $this->idea->votes(array($ideaID));
             if($res){
-                $result = array_merge($result, (array) $result[0]);
+                $result = array_merge($result, (array) $res[0]);
             }
         } else {
             // cast the vote
