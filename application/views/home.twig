@@ -21,23 +21,44 @@
 
 
 <table class="table">
-{% for idea in ideas %}
-    <tr class="status-{{idea.status}}">
-        <td class="votes">
-            {% if idea.status == 0 %}
-                {{macro.votes(idea.id, idea.votes)}}
-            {% else %}
-                {{_idea_states[idea.status]}}
-            {% endif %}
-        </td>
-        <td class="idea">
-            <h3><a href="{{site_url('idea/show/' ~ idea.id)}}">{{idea.title}}</a></h3>
-            <p class="muted">{{idea.description|shorten(140)}}</p>
-            <p>by <strong>{{idea.fullname}}</strong> submitted at <em>{{idea.created}}</em></p>
-        </td>
-    </tr>
+
+
+    {% set i=0 %}
+    {% for idea in ideas %}
+
+    {% if loop.index0 is even %}
+        <tr class="status-{{idea.status}} grey">
+    {% else %}
+        <tr class="status-{{idea.status}}">
+    {% endif %}
+
+            <td class="votes">
+
+                 {% if idea.status == 0 %}
+
+                                {{macro.votes(idea.id, idea.votes)}}
+
+
+                    {% else %}
+                        <div class="stateOfIdea">
+                        </div>
+                    {% endif %}
+            </td>
+
+            <td class="idea">
+                    {% if idea.status > 0 %}
+                        <p class="stateOfIdea">{{_idea_states[idea.status]}}</p>
+                    {% endif %}
+
+                    <h3><a href="{{site_url('idea/show/' ~ idea.id)}}">{{idea.title}}</a></h3>
+                    <p class="muted">{{idea.description|shorten(140)}}</p>
+                    <p>by <strong>{{idea.fullname}}</strong> submitted at <em>{{idea.created}}</em></p>
+            </td>
+        </tr>
 {% endfor %}
+
 </table>
+
 
 {% if order == 'search' %}
     {{pagination(site_url(order),limit,found, '?q=' ~ query|url_encode )}}
