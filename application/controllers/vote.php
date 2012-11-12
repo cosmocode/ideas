@@ -36,10 +36,13 @@ class Vote extends MY_Controller {
                 'idea'  => $ideaID,
                 'votes' => 0,
                 'mine'  => 0,
-                'error' => 1
+                'error' => 0
             );
-            $res    = $this->idea->votes(array($ideaID));
-            if(isset($res[$ideaID])) $result['votes'] = $res[$ideaID]['votes'];
+
+            $res = $this->idea->votes(array($ideaID));
+            if($res){
+                $result = array_merge($result, (array) $result[0]);
+            }
         } else {
             // cast the vote
             $login = $this->user->current->login;
