@@ -6,3 +6,4 @@ application/logs/*
 application/config/adldap.php
 application/config/database.php
 application/config/privileges.php
+ideas.tgz
