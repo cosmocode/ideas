@@ -10,7 +10,6 @@ do
 done
 
 tar -czvf ideas.tgz -C .. \
-    --exclude=ideas.tgz \
     --exclude=.git \
     --exclude=.gitignore \
     --exclude=.gitmodules \

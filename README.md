@@ -21,7 +21,8 @@ Create an empty database for the application:
 CREATE database ideas;
 ```
 
-Install the files to your Webserver webroot or a subdirectory of your choice and make sure your webserver honors the rewriting configuration in .htaccess files.
+Install the files to your Webserver webroot or a subdirectory of your choice and make sure your webserver honors the
+rewriting configuration in .htaccess files.
 
 Make the `application/cache` and `application/log` directories writable by the webserver.
 
@@ -29,11 +30,35 @@ Go to the `application/config` directory and copy the `*.dist` files to the same
 
 In `application/config/databases.php` configure the access to the database you created above.
 
-In `application/config/adldap.php` configure access to your Active Directory server that will be used to manage the logins.
+In `application/config/adldap.php` configure access to your Active Directory server that will be used to manage the
+logins.
 
 In `application/config/privileges.php` configure the users and/or groups that should have moderator rights.
 
 Open the application in your webbrowser and you're ready to go.
+
+Tuning Search Results
+---------------------
+
+This application relies on MySQL's fulltext search mechanism.
+
+Please note that the search will ignore words that are found in more than 50% of all items in the index.
+
+By default it requires a minimum word length of four characters. If you'd like to use shorter words, you need to
+reconfigure your MySQL Server:
+
+In your `my.cnf` file add the following in the `[mysqld]` section and restart MySQL.
+
+```
+ft_min_word_len = 3
+```
+
+To reindex existing ideas, use the following command in a MySQL console:
+
+```
+REPAIR TABLE ideas QUICK;
+```
+
 
 Acknowledgements
 -------

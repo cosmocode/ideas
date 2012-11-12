@@ -1,4 +1,11 @@
-{% set title = 'Willkommen' %}
+{% if order == 'new' %}
+    {% set title = 'Newst Ideas' %}
+{% elseif order == 'search' %}
+    {% set title = 'Search ' ~ query %}
+{% else %}
+    {% set title = 'Top Ideas' %}
+{% endif %}
+
 {% extends "layout/default.twig" %}
 {% block content %}
 
@@ -49,6 +56,8 @@
                     {% if idea.status > 0 %}
                         <p class="stateOfIdea">{{_idea_states[idea.status]}}</p>
                     {% endif %}
+
+                    <!-- score: {{ idea.score}} -->
 
                     <h3><a href="{{site_url('idea/show/' ~ idea.id)}}">{{idea.title}}</a></h3>
                     <p class="muted">{{idea.description|shorten(140)}}</p>

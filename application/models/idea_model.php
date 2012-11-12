@@ -72,12 +72,12 @@ class Idea_model extends CI_Model {
                        A.*,
                        IFNULL(SUM(B.vote),0) as votes,
                        C.fullname,
-                       MATCH(A.title, A.description) AGAINST (? WITH QUERY EXPANSION) AS score
+                       MATCH(A.title, A.description) AGAINST (?) AS score
                   FROM idea A LEFT JOIN vote B
                                      ON A.id = B.idea
                               LEFT JOIN user C
                                      ON A.login = C.login
-                 WHERE MATCH(A.title, A.description) AGAINST (? WITH QUERY EXPANSION)
+                 WHERE MATCH(A.title, A.description) AGAINST (?)
               GROUP BY A.id
               ORDER BY score DESC
                        $limitby";
