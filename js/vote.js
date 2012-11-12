@@ -54,7 +54,7 @@ function vote_init($box,votes,mine) {
     if(votes >= 0)
         html += '<div class="votes">' + votes + '</div>';
     else
-        html +=  '<div class="votes"><div class="minus">' + votes + '</div></div>';
+        html +=  '<div class="votes minus">' + votes + '</div>';
     html += '<a class="vote-down' + minedown + '" title="Good idea!">⋁</a>';
 
     $box.html(html);
