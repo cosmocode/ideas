@@ -2,19 +2,31 @@
 {% extends "layout/default.twig" %}
 {% block content %}
 
+
+    <div class="showIdeaWrapper">
+
+
 <h2>{{title}}</h2>
 
-{% if idea.status == 0 %}
-<div class="pull-left">
-    {{macro.votes(idea.id, idea.votes)}}
-</div>
-{% endif %}
 
-<p>by <strong>{{idea.fullname}}</strong> submitted at <em>{{idea.created}}</em></p>
+        {% if idea.status == 0 %}
+            {{macro.votes(idea.id, idea.votes)}}
+        {% else %}
+            <div class="stateOfIdea">
+            </div>
+        {% endif %}
+
+
+        <p>by <strong>{{idea.fullname}}</strong> submitted at <em>{{idea.created}}</em></p>
+<p>State: <strong>{{_idea_states[idea.status]}}</strong></p>
+
 
 <p>{{idea.description|prettytext}}</p>
+</div>
 
 {% if _user.role > 0 %}
+    <div class="line"></div>
+    <br>
     <form class="form-inline" action="{{site_url('idea/show/' ~ idea.id)}}" method="post">
         <legend>Moderation</legend>
         <select name="state">
