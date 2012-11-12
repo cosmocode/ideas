@@ -1,4 +1,11 @@
-{% set title = 'Willkommen' %}
+{% if order == 'new' %}
+    {% set title = 'Newst Ideas' %}
+{% elseif order == 'search' %}
+    {% set title = 'Search ' ~ query %}
+{% else %}
+    {% set title = 'Top Ideas' %}
+{% endif %}
+
 {% extends "layout/default.twig" %}
 {% block content %}
 
