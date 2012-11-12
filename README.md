@@ -33,4 +33,13 @@ In `application/config/adldap.php` configure access to your Active Directory ser
 
 In `application/config/privileges.php` configure the users and/or groups that should have moderator rights.
 
-Open the application in your webborwer and you're ready to go.
+Open the application in your webbrowser and you're ready to go.
+
+Acknowledgements
+-------
+
+Made by [CosmoCode](http://www.cosmocode.de/).
+
+Made with [CodeIgniter](http://www.codeigniter.com/), [adLDAP](http://adldap.sourceforge.net/),
+[Twig](http://twig.sensiolabs.org/), [Bootstrap](http://twitter.github.com/bootstrap/),
+[lessphp](http://leafo.net/lessphp/) and [JQuery](http://jquery.com/).
