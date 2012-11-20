@@ -375,7 +375,16 @@ $config['twig'] = array(
 |
 | Should be true for production systems
 */
-$config['cachecss'] = false; //should be true for live systems
+$config['cachecss'] = true;
+
+/**
+|--------------------------------------------------------------------------
+| Title of the Application
+|--------------------------------------------------------------------------
+|
+| Change to whatever you like
+*/
+$config['title'] = 'Ideas';
 
 /* End of file config.php */
 /* Location: ./application/config/config.php */
